@@ -1,0 +1,28 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Run frontend tests
+        run: docker build -t andrewssouza/react-test -f ./client/Dockerfile.dev ./client
+        run: docker run -e CI=true andrewssouza/react-test npm test
+ 
+      - name: Generate production images
+        run: docker build -t andrewssouza/multi-client ./client
+        run: docker build -t andrewssouza/multi-nginex ./nginex
+        run: docker build -t andrewssouza/multi-server ./server
+        run: docker build -t andrewssouza/multi-worker ./worker
+
+      - name: Push docker images
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        run: docker push andrewssouza/multi-client
+        run: docker push andrewssouza/multi-nginex
+        run: docker push andrewssouza/multi-server
+        run: docker push andrewssouza/multi-worker
