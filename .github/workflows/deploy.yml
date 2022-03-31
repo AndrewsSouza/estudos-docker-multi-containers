@@ -17,8 +17,8 @@ jobs:
 
       - name: Build client production image
         run: docker build -t andrewssouza/multi-client ./client
-      - name: Build nginex production image
-        run: docker build -t andrewssouza/multi-nginex ./nginex
+      - name: Build nginx production image
+        run: docker build -t andrewssouza/multi-nginx ./nginx
       - name: Build server production image
         run: docker build -t andrewssouza/multi-server ./server
       - name: Build worker production image
@@ -29,8 +29,8 @@ jobs:
 
       - name: Push production client image
         run: docker push andrewssouza/multi-client
-      - name: Push production nginex image
-        run: docker push andrewssouza/multi-nginex
+      - name: Push production nginx image
+        run: docker push andrewssouza/multi-nginx
       - name: Push production server image
         run: docker push andrewssouza/multi-server
       - name: Push production worker image
