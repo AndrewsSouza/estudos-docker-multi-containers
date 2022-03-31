@@ -14,24 +14,3 @@ jobs:
         run: docker build -t andrewssouza/react-test -f ./client/Dockerfile.dev ./client
       - name: Run frontend tests
         run: docker run -e CI=true andrewssouza/react-test npm test
- 
-      - name: Build client production image
-        run: docker build -t andrewssouza/multi-client ./client
-      - name: Build nginex production image
-        run: docker build -t andrewssouza/multi-nginex ./nginex
-      - name: Build server production image
-        run: docker build -t andrewssouza/multi-server ./server
-      - name: Build worker production image
-        run: docker build -t andrewssouza/multi-worker ./worker
-
-      - name: Login into Docker
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Push production client image
-        run: docker push andrewssouza/multi-client
-      - name: Push production nginex image
-        run: docker push andrewssouza/multi-nginex
-      - name: Push production server image
-        run: docker push andrewssouza/multi-server
-      - name: Push production worker image
-        run: docker push andrewssouza/multi-worker
