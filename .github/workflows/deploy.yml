@@ -11,27 +11,27 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build frontend test image
-        run: docker build -t andrewssouza/react-test -f ./client/Dockerfile.dev ./client
+        run: docker build -t 01042015/react-test -f ./client/Dockerfile.dev ./client
       - name: Run frontend tests
-        run: docker run -e CI=true andrewssouza/react-test npm test
+        run: docker run -e CI=true 01042015/react-test npm test
 
       - name: Build client production image
-        run: docker build -t andrewssouza/multi-client ./client
+        run: docker build -t 01042015/multi-client ./client
       - name: Build nginx production image
-        run: docker build -t andrewssouza/multi-nginx ./nginx
+        run: docker build -t 01042015/multi-nginx ./nginx
       - name: Build server production image
-        run: docker build -t andrewssouza/multi-server ./server
+        run: docker build -t 01042015/multi-server ./server
       - name: Build worker production image
-        run: docker build -t andrewssouza/multi-worker ./worker
+        run: docker build -t 01042015/multi-worker ./worker
 
       - name: Login into Docker
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push production client image
-        run: docker push andrewssouza/multi-client
+        run: docker push 01042015/multi-client
       - name: Push production nginx image
-        run: docker push andrewssouza/multi-nginx
+        run: docker push 01042015/multi-nginx
       - name: Push production server image
-        run: docker push andrewssouza/multi-server
+        run: docker push 01042015/multi-server
       - name: Push production worker image
-        run: docker push andrewssouza/multi-worker
+        run: docker push 01042015/multi-worker
