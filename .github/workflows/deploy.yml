@@ -36,6 +36,9 @@ jobs:
       - name: Push production worker image
         run: docker push 01042015/multi-worker
         
+      - name: Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*'
+        
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v18
         with:
@@ -46,4 +49,5 @@ jobs:
           existing_bucket_name: elasticbeanstalk-us-east-1-205603051109
           region: us-east-1
           version_label: ${{ github.sha }}
+          deployment_package: deploy.zip
           use_existing_version_if_available: true
