@@ -1,0 +1,8 @@
+## Apply changes
+kubectl apply -f k8s
+
+## Creates a secret
+kubectl create secret generic pgpassword --from-literal PGPASSOWORD=12345asdf
+
+## Install nginx ingress controller
+ingress-service.yamlkubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.0/deploy/static/provider/cloud/deploy.yaml
