@@ -17,8 +17,6 @@ jobs:
 
       - name: Build client production image
         run: docker build -t 01042015/multi-client -f ./client/Dockerfile ./client
-      - name: Build nginx production image
-        run: docker build -t 01042015/multi-nginx -f ./nginx/Dockerfile ./nginx
       - name: Build server production image
         run: docker build -t 01042015/multi-server -f ./server/Dockerfile ./server
       - name: Build worker production image
@@ -29,8 +27,6 @@ jobs:
 
       - name: Push production client image
         run: docker push 01042015/multi-client
-      - name: Push production nginx image
-        run: docker push 01042015/multi-nginx
       - name: Push production server image
         run: docker push 01042015/multi-server
       - name: Push production worker image
