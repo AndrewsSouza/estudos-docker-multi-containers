@@ -1,8 +1,20 @@
+IMPORTANT:
+Run nginx ingress controller on docker desktop
+
 ## Apply changes
 kubectl apply -f k8s
 
 ## Creates a secret
-kubectl create secret generic pgpassword --from-literal PGPASSOWORD=12345asdf
+kubectl create secret generic pgpassword --from-literal PGPASSWORD=12345asdf
 
 ## Install nginx ingress controller
 ingress-service.yamlkubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.0/deploy/static/provider/cloud/deploy.yaml
+
+## Create the kubernetes dashboard
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
+
+## Run dashboard
+kubectl proxy
+
+## Generates admin token for kubernetes v1.22 or below
+kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
